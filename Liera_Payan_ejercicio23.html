@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio #23 - IMC</title>
+</head>
+<body>
+
+  <h2>Cálculo de IMC (Mujer)</h2>
+
+  <!-- Inputs -->
+  <label>Peso (kg):</label>
+  <input type="number" id="peso" step="any"><br><br>
+
+  <label>Altura (m):</label>
+  <input type="number" id="altura" step="any"><br><br>
+
+  <!-- Botón -->
+  <button onclick="calcularIMC()">Calcular IMC</button>
+
+  <h3 id="resultado"></h3>
+
+  <script>
+    function calcularIMC() {
+      let peso = parseFloat(document.getElementById("peso").value);
+      let altura = parseFloat(document.getElementById("altura").value);
+
+      // Validaciones
+      if (isNaN(peso) || isNaN(altura)) {
+        document.getElementById("resultado").textContent = "Ingresa todos los datos.";
+        return;
+      }
+
+      if (altura <= 0) {
+        document.getElementById("resultado").textContent = "Altura inválida.";
+        return;
+      }
+
+      // Cálculo IMC
+      let imc = peso / (altura * altura);
+      let grado = "";
+
+      // Clasificación
+      if (imc < 18.5) {
+        grado = "Bajo peso";
+      } else if (imc < 25) {
+        grado = "Normal";
+      } else if (imc < 30) {
+        grado = "Sobrepeso";
+      } else if (imc < 35) {
+        grado = "Obesidad grado I";
+      } else if (imc < 40) {
+        grado = "Obesidad grado II";
+      } else {
+        grado = "Obesidad grado III";
+      }
+
+      document.getElementById("resultado").textContent =
+        "IMC: " + imc.toFixed(2) + " | Clasificación: " + grado;
+    }
+  </script>
+
+</body>
+</html>
