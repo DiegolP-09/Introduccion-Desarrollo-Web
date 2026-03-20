@@ -220,7 +220,7 @@
       Muestra un cuadro de diálogo modal en el navegador.<br>
       Detiene la ejecución hasta que el usuario lo cierra.
     </p>
-    <div class="code-block"><span class="kw">window</span>.<span class="fn">alert</span>(<span class="str">"Nombre: Juan Pérez\nCarrera: Ing. en Sistemas\nUniversidad: UABC\nSemestre: 6to"</span>);</div>
+    <div class="code-block"><span class="kw">window</span>.<span class="fn">alert</span>(<span class="str">"Nombre: Diego Liera Payan\nCarrera: Ing. en Software\nUniversidad: UAS\nSemestre: 6to"</span>);</div>
     <button class="btn btn-primary" onclick="mostrarAlert()">▶ Ejecutar alert()</button>
   </div>
 
@@ -232,9 +232,9 @@
       Inserta HTML directamente en el flujo del documento.<br>
       Si se llama después de la carga, reemplaza el contenido.
     </p>
-    <div class="code-block"><span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;h3&gt;Juan Pérez&lt;/h3&gt;"</span> +
-  <span class="str">"&lt;p&gt;Matrícula: 20230045&lt;/p&gt;"</span> +
-  <span class="str">"&lt;p&gt;Correo: juan@uabc.edu.mx&lt;/p&gt;"</span>);</div>
+    <div class="code-block"><span class="kw">document</span>.<span class="fn">write</span>(<span class="str">"&lt;h3&gt;Diego Liera Payan&lt;/h3&gt;"</span> +
+  <span class="str">"&lt;p&gt;Matrícula: 2002599&lt;/p&gt;"</span> +
+  <span class="str">"&lt;p&gt;Correo: estudianteuas@gmail.com&lt;/p&gt;"</span>);</div>
     <div id="output-area">
       <span style="color:var(--muted);">// La salida se mostrará aquí (simulada)</span>
     </div>
@@ -252,9 +252,9 @@
       Ideal para depuración; no visible para el usuario final.
     </p>
     <div class="code-block"><span class="kw">const</span> datos = {
-  nombre:     <span class="str">"Juan Pérez"</span>,
-  carrera:    <span class="str">"Ing. en Sistemas"</span>,
-  matricula:  <span class="str">"20230045"</span>,
+  nombre:     <span class="str">"Diego Liera Payan"</span>,
+  carrera:    <span class="str">"Ing. en Software"</span>,
+  matricula:  <span class="str">"2002599"</span>,
   semestre:   <span class="str">"6to"</span>
 };
 <span class="kw">console</span>.<span class="fn">log</span>(<span class="str">"=== Mis datos ==="</span>);
@@ -278,12 +278,12 @@
 
 <span class="cm">// Inyectamos HTML con los datos personales</span>
 contenedor.<span class="fn">innerHTML</span> = <span class="str">`
-  &lt;strong&gt;Nombre:&lt;/strong&gt;     Juan Pérez Rodríguez &lt;br&gt;
-  &lt;strong&gt;Carrera:&lt;/strong&gt;    Ing. en Sistemas Computacionales &lt;br&gt;
-  &lt;strong&gt;Matrícula:&lt;/strong&gt;  20230045 &lt;br&gt;
+  &lt;strong&gt;Nombre:&lt;/strong&gt;     Diego Liera Payan &lt;br&gt;
+  &lt;strong&gt;Carrera:&lt;/strong&gt;    Ing. en Software &lt;br&gt;
+  &lt;strong&gt;Matrícula:&lt;/strong&gt;  2002599 &lt;br&gt;
   &lt;strong&gt;Semestre:&lt;/strong&gt;   6to &lt;br&gt;
-  &lt;strong&gt;Correo:&lt;/strong&gt;     juan.perez@uabc.edu.mx &lt;br&gt;
-  &lt;strong&gt;GitHub:&lt;/strong&gt;     github.com/jperez-dev
+  &lt;strong&gt;Correo:&lt;/strong&gt;     estudianteuas@gmail.com &lt;br&gt;
+  &lt;strong&gt;GitHub:&lt;/strong&gt;     github.com/DiegoIP-09
 `</span>;</div>
 
     <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;">
@@ -308,16 +308,16 @@ contenedor.<span class="fn">innerHTML</span> = <span class="str">`
 
 </div><!-- /grid -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ── Datos personales centralizados ── */
   const datosPersonales = {
-    nombre:      "Juan Pérez Rodríguez",
-    carrera:     "Ing. en Sistemas Computacionales",
-    universidad: "Universidad Autónoma de Baja California",
-    matricula:   "20230045",
+    nombre:      "Diego Liera Payan",
+    carrera:     "Ing. en Software",
+    universidad: "Universidad Autónoma de Sinaloa",
+    matricula:   "2002599",
     semestre:    "6to",
-    correo:      "juan.perez@uabc.edu.mx",
-    github:      "github.com/jperez-dev"
+    correo:      "estudianteuas@gmail.com",
+    github:      "github.com/DiegoIP-09"
   };
 
   /* ── 1. window.alert() ── */
@@ -393,14 +393,4 @@ contenedor.<span class="fn">innerHTML</span> = <span class="str">`
       <span style="color:var(--accent)">Matrícula:</span>   ${datosPersonales.matricula}<br>
       <span style="color:var(--accent)">Semestre:</span>    ${datosPersonales.semestre}<br>
       <span style="color:var(--accent)">Correo:</span>      ${datosPersonales.correo}<br>
-      <span style="color:var(--accent)">GitHub:</span>      <a href="https://${datosPersonales.github}" style="color:var(--accent2)">${datosPersonales.github}</a>
-    `;
-  }
-
-  function limpiarPerfil() {
-    document.getElementById("perfil").innerHTML =
-      '<span style="color:var(--muted);">// Haz clic en "Mostrar perfil" para ver la salida</span>';
-  }
-</script>
-</body>
-</html>
+      <span style="color:var(--ac
