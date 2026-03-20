@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio #21</title>
+</head>
+<body>
+
+  <h2>Operaciones con JavaScript</h2>
+
+  <!-- Inputs -->
+  <label>Valor A:</label>
+  <input type="number" id="a"><br><br>
+
+  <label>Valor B:</label>
+  <input type="number" id="b"><br><br>
+
+  <!-- Botones -->
+  <button onclick="sumar()">Sumar</button>
+  <button onclick="restar()">Restar</button>
+  <button onclick="dividir()">Dividir</button>
+  <button onclick="potencia()">Exponenciación</button>
+
+  <h3>Resultado: <span id="resultado"></span></h3>
+
+  <script>
+    function obtenerValores() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+      return { a, b };
+    }
+
+    function sumar() {
+      let { a, b } = obtenerValores();
+      document.getElementById("resultado").textContent = a + b;
+    }
+
+    function restar() {
+      let { a, b } = obtenerValores();
+      document.getElementById("resultado").textContent = a - b;
+    }
+
+    function dividir() {
+      let { a, b } = obtenerValores();
+      if (b === 0) {
+        document.getElementById("resultado").textContent = "Error: división entre 0";
+      } else {
+        document.getElementById("resultado").textContent = a / b;
+      }
+    }
+
+    function potencia() {
+      let { a, b } = obtenerValores();
+      document.getElementById("resultado").textContent = a ** b;
+    }
+  </script>
+
+</body>
+</html>
