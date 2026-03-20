@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio #22 - Fórmula General</title>
+</head>
+<body>
+
+  <h2>Fórmula General</h2>
+
+  <!-- Inputs -->
+  <label>Valor de a:</label>
+  <input type="number" id="a"><br><br>
+
+  <label>Valor de b:</label>
+  <input type="number" id="b"><br><br>
+
+  <label>Valor de c:</label>
+  <input type="number" id="c"><br><br>
+
+  <!-- Botón -->
+  <button onclick="calcular()">Calcular</button>
+
+  <h3 id="resultado"></h3>
+
+  <script>
+    function calcular() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+      let c = parseFloat(document.getElementById("c").value);
+
+      // Validación básica
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        document.getElementById("resultado").textContent = "Por favor ingresa todos los valores.";
+        return;
+      }
+
+      if (a === 0) {
+        document.getElementById("resultado").textContent = "El valor de 'a' no puede ser 0.";
+        return;
+      }
+
+      // Discriminante
+      let discriminante = (b * b) - (4 * a * c);
+
+      if (discriminante < 0) {
+        document.getElementById("resultado").textContent = "No hay soluciones reales.";
+        return;
+      }
+
+      // Fórmula general
+      let x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+      let x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+
+      document.getElementById("resultado").textContent =
+        "x1 = " + x1 + " | x2 = " + x2;
+    }
+  </script>
+
+</body>
+</html>
