@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ejercicio #24 – Fechas con JavaScript</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f5f4;
+      color: #1c1917;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e7e5e4;
+      border-radius: 10px;
+      padding: 2rem 2.4rem;
+      max-width: 620px;
+      width: 100%;
+    }
+
+    .tag {
+      font-size: .72rem;
+      color: #78716c;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .6rem;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1c1917;
+      margin-bottom: .3rem;
+    }
+
+    .subtitle {
+      font-size: .85rem;
+      color: #78716c;
+      margin-bottom: 1.6rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e7e5e4;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Resultado */
+    .resultado {
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-left: 3px solid #a3a3a3;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .resultado .label {
+      font-size: .72rem;
+      color: #a8a29e;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .4rem;
+    }
+
+    .resultado .fecha-texto {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #292524;
+    }
+
+    /* Pasos */
+    .steps-title {
+      font-size: .85rem;
+      font-weight: 600;
+      color: #44403c;
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      display: flex;
+      gap: .85rem;
+      margin-bottom: .95rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      background: #e7e5e4;
+      color: #57534e;
+      font-size: .7rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .15rem;
+    }
+
+    .step p {
+      font-size: .84rem;
+      color: #44403c;
+      line-height: 1.55;
+    }
+
+    .step code {
+      background: #f5f5f4;
+      color: #292524;
+      border: 1px solid #e7e5e4;
+      padding: .1rem .35rem;
+      border-radius: 4px;
+      font-size: .78rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Código */
+    pre {
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+      overflow-x: auto;
+      font-size: .78rem;
+      line-height: 1.75;
+      font-family: 'Courier New', Courier, monospace;
+      color: #292524;
+      margin-top: 1.5rem;
+    }
+
+    .kw  { color: #7c3aed; }
+    .fn  { color: #0369a1; }
+    .st  { color: #15803d; }
+    .cm  { color: #a8a29e; font-style: italic; }
+    .num { color: #b45309; }
+
+    footer {
+      margin-top: 1.6rem;
+      font-size: .75rem;
+      color: #a8a29e;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <p class="tag">Ejercicio #24 · JavaScript</p>
+  <h1>Fechas con JavaScript</h1>
+  <p class="subtitle">Mostrar la fecha actual en texto usando la sentencia <strong>switch</strong></p>
+
+  <hr>
+
+  <div class="resultado">
+    <div class="label">Fecha de hoy</div>
+    <div class="fecha-texto" id="fecha-resultado">Calculando...</div>
+  </div>
+
+  <p class="steps-title">¿Cómo funciona?</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <p><code>new Date()</code> crea un objeto con la fecha y hora actual del sistema.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <p><code>getDay()</code> retorna un número del <strong>0</strong> (domingo) al <strong>6</strong> (sábado). Con <code>switch</code> lo convertimos al nombre del día.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <p><code>getMonth()</code> retorna del <strong>0</strong> (enero) al <strong>11</strong> (diciembre). Otro <code>switch</code> lo convierte al nombre del mes.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <p><code>getDate()</code> da el día del mes (1–31) y <code>getFullYear()</code> el año completo.</p>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <p>Se arma el texto con un <em>template literal</em> y se muestra con <code>innerHTML</code>.</p>
+  </div>
+
+<pre>
+<span class="cm">// 1. Fecha actual</span>
+<span class="kw">const</span> hoy = <span class="kw">new</span> <span class="fn">Date</span>();
+
+<span class="cm">// 2. Extraer valores</span>
+<span class="kw">const</span> numeroDia = hoy.<span class="fn">getDay</span>();      <span class="cm">// 0-6</span>
+<span class="kw">const</span> numeroMes = hoy.<span class="fn">getMonth</span>();    <span class="cm">// 0-11</span>
+<span class="kw">const</span> diaMes    = hoy.<span class="fn">getDate</span>();     <span class="cm">// 1-31</span>
+<span class="kw">const</span> anio      = hoy.<span class="fn">getFullYear</span>(); <span class="cm">// ej. 2026</span>
+
+<span class="cm">// 3. Nombre del día</span>
+<span class="kw">let</span> nombreDia;
+<span class="kw">switch</span> (numeroDia) {
+  <span class="kw">case</span> <span class="num">0</span>: nombreDia = <span class="st">"domingo"</span>;    <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">1</span>: nombreDia = <span class="st">"lunes"</span>;      <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">2</span>: nombreDia = <span class="st">"martes"</span>;     <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">3</span>: nombreDia = <span class="st">"miércoles"</span>;  <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">4</span>: nombreDia = <span class="st">"jueves"</span>;     <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">5</span>: nombreDia = <span class="st">"viernes"</span>;    <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">6</span>: nombreDia = <span class="st">"sábado"</span>;     <span class="kw">break</span>;
+}
+
+<span class="cm">// 4. Nombre del mes</span>
+<span class="kw">let</span> nombreMes;
+<span class="kw">switch</span> (numeroMes) {
+  <span class="kw">case</span>  <span class="num">0</span>: nombreMes = <span class="st">"enero"</span>;       <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">1</span>: nombreMes = <span class="st">"febrero"</span>;     <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">2</span>: nombreMes = <span class="st">"marzo"</span>;       <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">3</span>: nombreMes = <span class="st">"abril"</span>;       <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">4</span>: nombreMes = <span class="st">"mayo"</span>;        <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">5</span>: nombreMes = <span class="st">"junio"</span>;       <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">6</span>: nombreMes = <span class="st">"julio"</span>;       <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">7</span>: nombreMes = <span class="st">"agosto"</span>;      <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">8</span>: nombreMes = <span class="st">"septiembre"</span>;  <span class="kw">break</span>;
+  <span class="kw">case</span>  <span class="num">9</span>: nombreMes = <span class="st">"octubre"</span>;     <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">10</span>: nombreMes = <span class="st">"noviembre"</span>;   <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="num">11</span>: nombreMes = <span class="st">"diciembre"</span>;   <span class="kw">break</span>;
+}
+
+<span class="cm">// 5. Armar y mostrar el texto</span>
+<span class="kw">const</span> texto = <span class="st">`Hoy es ${nombreDia} ${diaMes} de ${nombreMes} del año ${anio}`</span>;
+document.<span class="fn">getElementById</span>(<span class="st">"fecha-resultado"</span>).innerHTML = texto;
+</pre>
+
+</div>
+
+<footer>Ejercicio #24 · Programación Web · JavaScript Fechas</footer>
+
+<script>
+  const hoy = new Date();
+
+  const numeroDia = hoy.getDay();
+  const numeroMes = hoy.getMonth();
+  const diaMes    = hoy.getDate();
+  const anio      = hoy.getFullYear();
+
+  let nombreDia;
+  switch (numeroDia) {
+    case 0: nombreDia = "domingo";   break;
+    case 1: nombreDia = "lunes";     break;
+    case 2: nombreDia = "martes";    break;
+    case 3: nombreDia = "miércoles"; break;
+    case 4: nombreDia = "jueves";    break;
+    case 5: nombreDia = "viernes";   break;
+    case 6: nombreDia = "sábado";    break;
+  }
+
+  let nombreMes;
+  switch (numeroMes) {
+    case  0: nombreMes = "enero";      break;
+    case  1: nombreMes = "febrero";    break;
+    case  2: nombreMes = "marzo";      break;
+    case  3: nombreMes = "abril";      break;
+    case  4: nombreMes = "mayo";       break;
+    case  5: nombreMes = "junio";      break;
+    case  6: nombreMes = "julio";      break;
+    case  7: nombreMes = "agosto";     break;
+    case  8: nombreMes = "septiembre"; break;
+    case  9: nombreMes = "octubre";    break;
+    case 10: nombreMes = "noviembre";  break;
+    case 11: nombreMes = "diciembre";  break;
+  }
+
+  const texto = `Hoy es ${nombreDia} ${diaMes} de ${nombreMes} del año ${anio}`;
+  document.getElementById("fecha-resultado").innerHTML = texto;
+</script>
+
+</body>
+</html>
