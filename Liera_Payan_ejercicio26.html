@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 26: Tablas de Multiplicar Dinámicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        #tablas {
+            margin-top: 20px;
+        }
+        .tabla {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tablas de Multiplicar Dinámicas</h1>
+    <input type="number" id="numero" min="1" placeholder="Ingresa un número positivo">
+    <button onclick="generarTablas()">Generar tablas de multiplicar</button>
+    <div id="tablas"></div>
+
+    <script>
+        function generarTablas() {
+            const num = parseInt(document.getElementById('numero').value);
+            if (isNaN(num) || num < 1) {
+                alert('Por favor, ingresa un número positivo entero.');
+                return;
+            }
+            let output = '';
+            for (let i = 1; i <= num; i++) {
+                output += '<div class="tabla"><h3>Tabla del ' + i + '</h3>';
+                for (let j = 1; j <= 10; j++) {
+                    output += i + ' x ' + j + ' = ' + (i * j) + '<br>';
+                }
+                output += '</div>';
+            }
+            document.getElementById('tablas').innerHTML = output;
+        }
+    </script>
+</body>
+</html>
