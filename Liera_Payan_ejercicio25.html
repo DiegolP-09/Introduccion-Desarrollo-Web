@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 25: Tablas de Multiplicar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #tablas {
+            margin-top: 20px;
+        }
+        .tabla {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tablas de Multiplicar</h1>
+    <button onclick="generarTablas()">Generar tablas de multiplicar</button>
+    <div id="tablas"></div>
+
+    <script>
+        function generarTablas() {
+            let output = '';
+            for (let i = 1; i <= 10; i++) {
+                output += '<div class="tabla"><h3>Tabla del ' + i + '</h3>';
+                for (let j = 1; j <= 10; j++) {
+                    output += i + ' x ' + j + ' = ' + (i * j) + '<br>';
+                }
+                output += '</div>';
+            }
+            document.getElementById('tablas').innerHTML = output;
+        }
+    </script>
+</body>
+</html>
