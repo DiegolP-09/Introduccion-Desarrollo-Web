@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio #29 – Pares e Impares</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f2;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 2rem 2.4rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .tag {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #999;
+      margin-bottom: .4rem;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+
+    .desc {
+      font-size: .82rem;
+      color: #777;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #efefef;
+    }
+
+    label {
+      display: block;
+      font-size: .82rem;
+      color: #555;
+      margin-bottom: .35rem;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: .6rem .8rem;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-size: .95rem;
+      background: #fafafa;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color .15s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #1a1a1a;
+      background: #fff;
+    }
+
+    button {
+      width: 100%;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      padding: .65rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    button:hover { background: #333; }
+
+    .resultado {
+      margin-top: 1.2rem;
+      border-left: 3px solid #1a1a1a;
+      border-radius: 5px;
+      padding: .9rem 1rem;
+      font-size: .95rem;
+      display: none;
+    }
+
+    .resultado.visible { display: block; }
+
+    /* Color según resultado */
+    .resultado.par   { background: #f0faf0; border-left-color: #2d7a2d; color: #1a4d1a; }
+    .resultado.impar { background: #faf0f0; border-left-color: #7a2d2d; color: #4d1a1a; }
+    .resultado.error { background: #f4f4f2; border-left-color: #999;    color: #555;    }
+
+    .formula {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid #efefef;
+      font-size: .78rem;
+      color: #999;
+    }
+
+    .formula code {
+      background: #f0f0ee;
+      padding: .1rem .35rem;
+      border-radius: 3px;
+      font-size: .78rem;
+      color: #444;
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      font-size: .72rem;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <p class="tag">Ejercicio #29 · JavaScript</p>
+    <h1>Números Pares e Impares</h1>
+    <p class="desc">Ingresa un número entero y determina si es par o impar.</p>
+
+    <label for="numero">Número</label>
+    <input type="number" id="numero" placeholder="Ej. 7">
+
+    <button onclick="verificar()">Verificar</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <div class="formula">
+      Lógica: <code>numero % 2 === 0</code> → Par &nbsp;|&nbsp; resto distinto de 0 → Impar
+    </div>
+  </div>
+
+  <footer>Ejercicio #29 · Programación Web · Pares e Impares</footer>
+
+  <script>
+    function verificar() {
+      let numero = parseInt(document.getElementById('numero').value);
+      let el = document.getElementById('resultado');
+
+      // Validación
+      if (isNaN(numero)) {
+        el.className = 'resultado error visible';
+        el.textContent = 'Por favor ingresa un número entero.';
+        return;
+      }
+
+      // Lógica principal: módulo 2
+      if (numero % 2 === 0) {
+        el.className = 'resultado par visible';
+        el.textContent = 'Par';
+      } else {
+        el.className = 'resultado impar visible';
+        el.textContent = 'Impar';
+      }
+    }
+
+    // Permitir presionar Enter
+    document.getElementById('numero').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') verificar();
+    });
+  </script>
+
+</body>
+</html>
