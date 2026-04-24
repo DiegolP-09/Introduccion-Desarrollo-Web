@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio #32 – Calculadora de Calificaciones</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f2;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 2rem 2.4rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .tag {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #999;
+      margin-bottom: .4rem;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+
+    .desc {
+      font-size: .82rem;
+      color: #777;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #efefef;
+    }
+
+    label {
+      display: block;
+      font-size: .82rem;
+      color: #555;
+      margin-bottom: .35rem;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: .6rem .8rem;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-size: .95rem;
+      background: #fafafa;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color .15s;
+    }
+
+    input[type="number"]:focus {
+      border-color: #1a1a1a;
+      background: #fff;
+    }
+
+    button {
+      width: 100%;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      padding: .65rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    button:hover { background: #333; }
+
+    /* Resultado */
+    .resultado {
+      margin-top: 1.2rem;
+      border-left: 3px solid #1a1a1a;
+      border-radius: 5px;
+      padding: .9rem 1rem;
+      font-size: .95rem;
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .resultado.visible { display: flex; }
+
+    .letra {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .detalle {
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+
+    .detalle span {
+      display: block;
+      font-size: .75rem;
+      margin-top: .2rem;
+      opacity: .7;
+    }
+
+    /* Colores por letra */
+    .grade-A { background: #f0faf0; border-left-color: #2d7a2d; color: #1a4d1a; }
+    .grade-B { background: #f0f5ff; border-left-color: #2d4d9a; color: #1a2d5a; }
+    .grade-C { background: #fffbf0; border-left-color: #9a7a2d; color: #5a4a1a; }
+    .grade-D { background: #fff5f0; border-left-color: #9a4d2d; color: #5a2a1a; }
+    .grade-F { background: #faf0f0; border-left-color: #7a2d2d; color: #4d1a1a; }
+    .grade-error { background: #f4f4f2; border-left-color: #999; color: #555; }
+
+    /* Tabla de rangos */
+    .tabla-rangos {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid #efefef;
+    }
+
+    .tabla-rangos p {
+      font-size: .75rem;
+      color: #999;
+      margin-bottom: .5rem;
+    }
+
+    .rangos {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+    }
+
+    .rango {
+      font-size: .72rem;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+      color: #555;
+      background: #fafafa;
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      font-size: .72rem;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <p class="tag">Ejercicio #32 · JavaScript</p>
+    <h1>Calculadora de Calificaciones</h1>
+    <p class="desc">Ingresa una puntuación del 0 al 100 y obtén tu calificación en letra.</p>
+
+    <label for="puntuacion">Puntuación (0 – 100)</label>
+    <input type="number" id="puntuacion" min="0" max="100" placeholder="Ej. 85">
+
+    <button onclick="calcular()">Calcular calificación</button>
+
+    <div class="resultado" id="resultado">
+      <div class="letra" id="out-letra"></div>
+      <div class="detalle" id="out-detalle"></div>
+    </div>
+
+    <div class="tabla-rangos">
+      <p>Tabla de rangos:</p>
+      <div class="rangos">
+        <span class="rango">90 – 100 → A</span>
+        <span class="rango">80 – 89 → B</span>
+        <span class="rango">70 – 79 → C</span>
+        <span class="rango">60 – 69 → D</span>
+        <span class="rango">0 – 59 → F</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>Ejercicio #32 · Programación Web · Calculadora de Calificaciones</footer>
+
+  <script>
+    function calcular() {
+      let puntuacion = parseInt(document.getElementById('puntuacion').value);
+      let el         = document.getElementById('resultado');
+      let outLetra   = document.getElementById('out-letra');
+      let outDetalle = document.getElementById('out-detalle');
+
+      // Validación
+      if (isNaN(puntuacion) || puntuacion < 0 || puntuacion > 100) {
+        el.className       = 'resultado grade-error visible';
+        outLetra.textContent   = '–';
+        outDetalle.innerHTML   = 'Ingresa una puntuación válida entre 0 y 100.';
+        return;
+      }
+
+      // Lógica principal con if, else if, else
+      let letra, descripcion;
+
+      if (puntuacion >= 90) {
+        letra       = 'A';
+        descripcion = 'Excelente (90 – 100)';
+      } else if (puntuacion >= 80) {
+        letra       = 'B';
+        descripcion = 'Muy bien (80 – 89)';
+      } else if (puntuacion >= 70) {
+        letra       = 'C';
+        descripcion = 'Bien (70 – 79)';
+      } else if (puntuacion >= 60) {
+        letra       = 'D';
+        descripcion = 'Suficiente (60 – 69)';
+      } else {
+        letra       = 'F';
+        descripcion = 'Reprobado (0 – 59)';
+      }
+
+      // Mostrar resultado
+      el.className           = 'resultado grade-' + letra + ' visible';
+      outLetra.textContent   = letra;
+      outDetalle.innerHTML   = 'Calificación: <strong>' + letra + '</strong><span>' + descripcion + ' · Puntuación: ' + puntuacion + '</span>';
+    }
+
+    // Permitir Enter
+    document.getElementById('puntuacion').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') calcular();
+    });
+  </script>
+
+</body>
+</html>
