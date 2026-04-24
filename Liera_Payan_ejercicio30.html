@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio #30 – Crear Usuario</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f2;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 2rem 2.4rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .tag {
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #999;
+      margin-bottom: .4rem;
+    }
+
+    h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+
+    .desc {
+      font-size: .82rem;
+      color: #777;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #efefef;
+    }
+
+    label {
+      display: block;
+      font-size: .82rem;
+      color: #555;
+      margin-bottom: .35rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: .6rem .8rem;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      font-size: .95rem;
+      background: #fafafa;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color .15s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #1a1a1a;
+      background: #fff;
+    }
+
+    button {
+      width: 100%;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      padding: .65rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    button:hover { background: #333; }
+
+    /* Resultado */
+    .resultado {
+      margin-top: 1.2rem;
+      background: #f4f4f2;
+      border-left: 3px solid #1a1a1a;
+      border-radius: 5px;
+      padding: .9rem 1rem;
+      font-size: .9rem;
+      color: #1a1a1a;
+      display: none;
+      line-height: 1.9;
+    }
+
+    .resultado.visible { display: block; }
+
+    .resultado .linea {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .resultado .etiqueta {
+      color: #888;
+      font-size: .82rem;
+      min-width: 180px;
+    }
+
+    .resultado .valor {
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    /* Fórmula */
+    .formula {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid #efefef;
+      font-size: .78rem;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    .formula code {
+      background: #f0f0ee;
+      padding: .1rem .35rem;
+      border-radius: 3px;
+      font-size: .78rem;
+      color: #444;
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      font-size: .72rem;
+      color: #bbb;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <p class="tag">Ejercicio #30 · JavaScript</p>
+    <h1>Crear Usuario</h1>
+    <p class="desc">Ingresa nombre y apellido para generar el usuario y las iniciales.</p>
+
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" placeholder="Ej. Juan">
+
+    <label for="apellido">Apellido</label>
+    <input type="text" id="apellido" placeholder="Ej. Lopez">
+
+    <button onclick="crearUsuario()">Crear usuario</button>
+
+    <div class="resultado" id="resultado">
+      <div class="linea">
+        <span class="etiqueta">Nombre de usuario:</span>
+        <span class="valor" id="out-usuario"></span>
+      </div>
+      <div class="linea">
+        <span class="etiqueta">Iniciales (en mayúsculas):</span>
+        <span class="valor" id="out-iniciales"></span>
+      </div>
+    </div>
+
+    <div class="formula">
+      Usuario: <code>(nombre + apellido).toLowerCase()</code><br>
+      Iniciales: <code>nombre[0].toUpperCase() + apellido[0].toUpperCase()</code>
+    </div>
+  </div>
+
+  <footer>Ejercicio #30 · Programación Web · Crear Usuario</footer>
+
+  <script>
+    function crearUsuario() {
+      let nombre   = document.getElementById('nombre').value.trim();
+      let apellido = document.getElementById('apellido').value.trim();
+      let el       = document.getElementById('resultado');
+
+      // Validación
+      if (nombre === '' || apellido === '') {
+        el.className = 'resultado visible';
+        el.querySelector('#out-usuario').textContent   = '';
+        el.querySelector('#out-iniciales').textContent = '';
+        el.querySelector('.linea:first-child .etiqueta').textContent = 'Por favor ingresa nombre y apellido.';
+        return;
+      }
+
+      // Lógica principal
+      let usuario   = (nombre + apellido).toLowerCase();          // "juanlopez"
+      let iniciales = nombre[0].toUpperCase() + apellido[0].toUpperCase(); // "JL"
+
+      // Mostrar resultado
+      document.getElementById('out-usuario').textContent   = usuario;
+      document.getElementById('out-iniciales').textContent = iniciales;
+      el.querySelector('.linea:first-child .etiqueta').textContent = 'Nombre de usuario:';
+      el.classList.add('visible');
+    }
+
+    // Permitir Enter en cualquier input
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') crearUsuario();
+      });
+    });
+  </script>
+
+</body>
+</html>
